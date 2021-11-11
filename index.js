@@ -24,6 +24,8 @@ async function run() {
         const productsCollection = database.collection('products');
         const allProductsCollection = database.collection('explore')
         const usersCollection = database.collection('users');
+        const orderCollection = database.collection('order');
+        const reviewCollection = database.collection('reviews');
 
 
         //GET products
@@ -32,6 +34,21 @@ async function run() {
             const products = await cursor.toArray();
             res.json(products);
         })
+
+        //GET reviews
+        app.get('/reviews', async (req, res) => {
+            const cursor = reviewCollection.find({});
+            const reviews = await cursor.toArray();
+            res.json(reviews);
+        })
+
+        // Use POST to get data by keys
+        app.post('/products/byKey', async (req, res) => {
+            const keys = req.body;
+            const query = { key: { $in: keys } }
+            const products = await productsCollection.find(query).toArray();
+            res.json(products);
+        });
 
         //GET USER
         app.get('/users/:email', async (req, res) => {
