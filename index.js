@@ -130,8 +130,8 @@ async function run() {
             res.json(result);
         });
 
-         // Delete Product
-         app.delete("/deleteProduct/:id", async (req, res) => {
+        // Delete Product
+        app.delete("/deleteProduct/:id", async (req, res) => {
             // console.log(req.params.id);
             const result = await allProductsCollection.deleteOne({
                 _id: ObjectId(req.params.id),
@@ -161,7 +161,7 @@ async function run() {
 
         })
 
-       // Admin Set
+        // Admin Set
         app.put('/users/admin', async (req, res) => {
             const user = req.body;
             console.log(user);
