@@ -11,8 +11,6 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-//arcanecss
-//KLIqUi36Zcf4DTxr
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.aneek.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -76,7 +74,7 @@ async function run() {
             res.json(result);
         });
 
-        // add Package
+        // add Product
         app.post("/addProduct", async (req, res) => {
             const addProduct = req.body;
             const result = await allProductsCollection.insertOne(addProduct);
@@ -163,7 +161,7 @@ async function run() {
 
         })
 
-       
+       // Admin Set
         app.put('/users/admin', async (req, res) => {
             const user = req.body;
             console.log(user);
@@ -173,12 +171,10 @@ async function run() {
             res.json(result);
 
         })
-
     }
     finally {
         // await client.close();
     }
-
 }
 
 run().catch(console.dir);
