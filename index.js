@@ -104,6 +104,12 @@ async function run() {
             res.json(products);
         });
 
+        app.post('/explore/byKey', async (req, res) => {
+            const keys = req.body;
+            const query = { key: { $in: keys } }
+            const allproducts = await allProductsCollection.find(query).toArray();
+            res.json(allproducts);
+        });
 
         app.post('/users', async (req, res) => {
             const user = req.body;
